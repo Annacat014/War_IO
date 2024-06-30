@@ -39,6 +39,12 @@ namespace LearnGame.Movement
         {
             var delta = MovementDirection * _speed * Time.deltaTime;
             _characterController.Move(delta);
+            
+            if (Input.GetKey(KeyCode.Space))
+            {
+                var deltaB = MovementDirection * _speed * 2 * Time.deltaTime;
+                _characterController.Move(deltaB);
+            }
         }
 
         private void Rotate()

@@ -22,7 +22,7 @@ namespace LearnGame.Shooting
 
             _target = GetTarget();
 
-            _nexShotTimerSec -= Time.time;
+            _nexShotTimerSec -= Time.deltaTime;
 
             if ( _nexShotTimerSec < 0 )
             {
