@@ -21,7 +21,7 @@ namespace LearnGame.Shooting
         {
 
             _target = GetTarget();
-
+            
             _nexShotTimerSec -= Time.deltaTime;
 
             if ( _nexShotTimerSec < 0 )
@@ -38,6 +38,11 @@ namespace LearnGame.Shooting
 
         public void SetWeapon( Weapon weaponPrefab, Transform hand )
         {
+
+            if ( _weapon != null ) 
+                Destroy(_weapon.gameObject);
+
+
             _weapon = Instantiate(weaponPrefab, hand);
             _weapon.transform.localPosition = Vector3.zero;
             _weapon.transform.localRotation = Quaternion.identity;
@@ -49,9 +54,9 @@ namespace LearnGame.Shooting
             
             var position = _weapon.transform.position;
             var radius = _weapon.ShootRadius;
-            var mask = LayerUtils.EnemyMask;
+            var maskCharacters = LayerUtils.CharactersMask;
 
-            var size = Physics.OverlapSphereNonAlloc(position, radius, _collider, mask);
+            var size = Physics.OverlapSphereNonAlloc(position, radius, _collider, maskCharacters);
 
             if (size > 0)
             {

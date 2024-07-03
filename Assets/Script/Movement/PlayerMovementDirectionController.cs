@@ -25,7 +25,12 @@ namespace LearnGame.Movement
             direction = _camera.transform.rotation * direction;
             direction.y = 0;
 
-            MovementDirection = direction.normalized; 
+            MovementDirection = direction.normalized;
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                MovementDirection = direction.normalized * 2;
+            }
         }
     }
 }
