@@ -2,6 +2,7 @@ using LearnGame.Movement;
 using LearnGame.Shooting;
 using LearnGame.PickUp;
 using UnityEngine;
+using LearnGame.Enemy;
 
 namespace LearnGame
 {
@@ -15,17 +16,22 @@ namespace LearnGame
         private Transform _hand;
 
         [SerializeField]
+        private Animator _animator;
+
+        [SerializeField]
         private float _health = 2f;
 
         private IMovementDirectionSource _movementDirectionSource;
         private CharacterMovmentController _characterMovmentController;
         private ShootingController _shootingController;
-
+        //private EnemyTarget _enemyTarget;
+        
         protected void Awake()
         {
             _movementDirectionSource = GetComponent<IMovementDirectionSource>();
             _characterMovmentController = GetComponent<CharacterMovmentController>();
             _shootingController = GetComponent<ShootingController>();
+            //_enemyTarget = GetComponent<EnemyTarget>();
         }
 
         protected void Start()
@@ -41,8 +47,15 @@ namespace LearnGame
             {
                 lookDirection = (_shootingController.TargetPosition - transform.position).normalized;
             }
+
             _characterMovmentController.MovementDirection = direction;
             _characterMovmentController.LookDirection = lookDirection;
+            //int SIZE = _enemyTarget.FindAAllTargets(LayerUtils.CharactersMask);
+            
+
+            _animator.SetBool("IsMoving", direction != Vector3.zero);
+            _animator.SetBool("IsShooting", _shootingController.HastTarget);
+            //_animator.SetBool("Win", SIZE == 1);
 
             if (_health <= 0f)
                 Destroy(gameObject);

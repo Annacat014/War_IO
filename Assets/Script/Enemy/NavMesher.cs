@@ -19,7 +19,7 @@ namespace LearnGame.Enemy
         {
             _filter = new NavMeshQueryFilter { areaMask = NavMesh.AllAreas };
             IsPathCalculated = false;
-
+            _navMashPath = new NavMeshPath();
             _agentTransform = agentTransform;
         }
 

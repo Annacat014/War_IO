@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using UnityEngine;
 
 namespace LearnGame.Enemy
@@ -46,12 +46,12 @@ namespace LearnGame.Enemy
         public float DistanceToClosesFromAgent()
         {
             if (Closest != null)
-                DistanceFromAgentTo(Closest);
+                /*return*/ DistanceFromAgentTo(Closest);
 
             return 0;
         }
 
-        private int FindAAllTargets(int layerMask)
+        public int FindAAllTargets(int layerMask)
         {
             var size = Physics.OverlapSphereNonAlloc(
                 _agentTransform.position, _viewRadius, _colliders, layerMask);
@@ -60,5 +60,10 @@ namespace LearnGame.Enemy
         }
 
         private float DistanceFromAgentTo(GameObject go) => (_agentTransform.position - go.transform.position).magnitude;
+
+        public static implicit operator EnemyTarget(float v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
